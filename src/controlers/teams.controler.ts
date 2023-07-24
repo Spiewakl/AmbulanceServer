@@ -1,6 +1,9 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param, Put } from '@nestjs/common';
+import { AddTeamDto } from 'src/dto/add-team.dto';
+import { UpdateTeamDto } from 'src/dto/update-team.dto';
 import { Team } from 'src/entities/team.entity';
 import { TeamService } from 'src/repositories/team.service';
+import { DeleteResult } from 'typeorm';
 
 
 @Controller('Team')
@@ -8,7 +11,22 @@ export class TeamController {
   constructor(private readonly teamService: TeamService) {}
 
   @Get()
-  async getHello(): Promise <Team[]> {
+  async getTeams(): Promise<Team[]> { 
     return this.teamService.findAll();
+  }
+
+  @Post()
+  async addTeam(@Body()addTeamDto: AddTeamDto): Promise<Team> {
+    return this.teamService.addTeam(addTeamDto);
+  }
+
+  @Delete("/:id")
+  async deleteTeam(@Param("id") id: number): Promise<DeleteResult> {
+    return this.teamService.deleteTeam(id);
+  }
+
+  @Put("/:id")
+  async updateTeam(@Param("id") id: number, @Body()updateTeamDto: UpdateTeamDto): Promise<Team> {
+    return this.teamService.updateTeam(id, updateTeamDto);
   }
 }
