@@ -28,7 +28,13 @@ export class TeamService {
 
     async updateTeam(id: number, updateTeamDto: UpdateTeamDto): Promise<Team> {
         const team = await this.teamRepository.findOneBy({id: id});
-        team.name=updateTeamDto.name;
+        if(updateTeamDto.name !== null) {
+            team.name = updateTeamDto.name;
+        }
+        if(updateTeamDto.status !== null) {
+            team.status = updateTeamDto.status;
+        }
         return this.teamRepository.save(team);
       }
+
 }
