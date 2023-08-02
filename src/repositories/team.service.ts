@@ -17,6 +17,11 @@ export class TeamService {
         return this.teamRepository.find();
     }
 
+    async findByName(name: string): Promise<Team | null> {
+        const result = await this.teamRepository.findOneBy({name: name});
+        return result;
+    }
+
     async addTeam(addTeamDto: AddTeamDto): Promise<Team> {
         const newTeam = this.teamRepository.create({name: addTeamDto.name, status: TeamStatusEnum.Free});
         return this.teamRepository.save(newTeam);
