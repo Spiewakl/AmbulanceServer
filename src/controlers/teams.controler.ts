@@ -1,8 +1,8 @@
 import { Controller, Get, Post, Body, Delete, Param, Put } from '@nestjs/common';
-import { AddTeamDto } from 'src/dto/add-team.dto';
-import { UpdateTeamDto } from 'src/dto/update-team.dto';
+import { AddTeamDto } from 'src/dto/team/add-team.dto';
+import { UpdateTeamDto } from 'src/dto/team/update-team.dto';
 import { Team } from 'src/entities/team.entity';
-import { TeamService } from 'src/repositories/team.service';
+import { TeamService } from 'src/services/team.service';
 import { DeleteResult } from 'typeorm';
 
 

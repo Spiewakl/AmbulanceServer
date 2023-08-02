@@ -8,7 +8,7 @@ import {
 import { Injectable } from "@nestjs/common";
 import { Repository } from "typeorm";
 import { Team } from "../entities/team.entity";
-import { TeamService } from 'src/repositories/team.service';
+import { TeamService } from 'src/services/team.service';
 
 @ValidatorConstraint({ async: true })
 @Injectable()
