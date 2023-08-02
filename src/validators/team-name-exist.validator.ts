@@ -5,12 +5,13 @@ import {
     ValidatorConstraintInterface,
     ValidationArguments,
   } from 'class-validator';
-import { Inject } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { Repository } from "typeorm";
 import { Team } from "../entities/team.entity";
 import { TeamService } from 'src/repositories/team.service';
 
 @ValidatorConstraint({ async: true })
+@Injectable()
 export class IsTeamNotRegistered implements ValidatorConstraintInterface{
     constructor( private teamService: TeamService){}
 
