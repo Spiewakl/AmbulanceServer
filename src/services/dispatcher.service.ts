@@ -1,9 +1,8 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { DeleteResult, Repository } from "typeorm";
-import { Team, TeamStatusEnum } from "../entities/team.entity"
-import { AddDispatcherDto } from "src/dto/dispatcher/add-dispatcher.dto";
-import { UpdateDispatcherDto } from "src/dto/dispatcher/update-dispatcher.dto";
-import { Dispatcher } from "src/entities/dispatcher.entity";
+import { Dispatcher } from "../entities/dispatcher.entity"
+import { AddDispatcherDto } from "../dto/dispatcher/add-dispatcher.dto";
+import { UpdateDispatcherDto } from "../dto/dispatcher/update-dispatcher.dto";
 
 @Injectable()
 

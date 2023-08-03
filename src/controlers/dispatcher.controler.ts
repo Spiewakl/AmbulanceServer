@@ -1,8 +1,8 @@
 import { Controller, Get, Post, Body, Delete, Param, Put } from '@nestjs/common';
-import { AddDispatcherDto } from "src/dto/dispatcher/add-dispatcher.dto";
-import { UpdateDispatcherDto } from "src/dto/dispatcher/update-dispatcher.dto";
-import { Dispatcher } from 'src/entities/dispatcher.entity';
-import { DispatcherService } from 'src/services/dispatcher.service';
+import { AddDispatcherDto } from "../dto/dispatcher/add-dispatcher.dto";
+import { UpdateDispatcherDto } from "../dto/dispatcher/update-dispatcher.dto";
+import { Dispatcher } from '../entities/dispatcher.entity';
+import { DispatcherService } from '../services/dispatcher.service';
 import { DeleteResult } from 'typeorm';
 
 
@@ -11,22 +11,22 @@ export class DispatcherController {
   constructor(private readonly dispatcherService: DispatcherService) {}
 
   @Get()
-  async getTeams(): Promise<Dispatcher[]> { 
+  async getDispatcher(): Promise<Dispatcher[]> { 
     return this.dispatcherService.findAll();
   }
 
   @Post()
-  async addTeam(@Body()addDispatcherDto: AddDispatcherDto): Promise<Dispatcher> {
+  async addDispatcher(@Body()addDispatcherDto): Promise<Dispatcher> {
     return this.dispatcherService.addDispatcher(addDispatcherDto);
   }
 
   @Delete("/:id")
-  async deleteTeam(@Param("id") id: number): Promise<DeleteResult> {
+  async deleteDispatcher(@Param("id") id: number): Promise<DeleteResult> {
     return this.dispatcherService.deleteDispatcher(id);
   }
 
   @Put("/:id")
-  async updateTeam(@Param("id") id: number, @Body()updateTeamDto: UpdateDispatcherDto): Promise<Dispatcher> {
+  async updateDispatcher(@Param("id") id: number, @Body()updateTeamDto): Promise<Dispatcher> {
     return this.dispatcherService.updateDispatcher(id, updateTeamDto);
   }
 }
