@@ -11,6 +11,9 @@ export class Team {
 
     @Column()
     status: TeamStatusEnum;
+
+    @Column()
+    password: string;
 };
 export enum TeamStatusEnum{
     Free='base',

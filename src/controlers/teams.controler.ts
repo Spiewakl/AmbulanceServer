@@ -26,7 +26,7 @@ export class TeamController {
   }
 
   @Put("/:id")
-  async updateTeam(@Param("id") id: number, @Body()updateTeamDto: UpdateTeamDto): Promise<Team> {
+  async updateTeam(@Param("id") id: number, @Body()updateTeamDto): Promise<Team> {
     return this.teamService.updateTeam(id, updateTeamDto);
   }
 }

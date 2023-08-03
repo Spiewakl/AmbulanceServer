@@ -16,6 +16,7 @@ export class IsTeamNotRegistered implements ValidatorConstraintInterface{
     constructor( private teamService: TeamService){}
 
     async validate(value: string, validationArguments?: ValidationArguments): Promise<boolean>{
+      if (value === null || value === undefined) return true;
         const result = await this.teamService.findByName(value);
         return result === null;
     }

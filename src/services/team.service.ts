@@ -39,6 +39,9 @@ export class TeamService {
         if(updateTeamDto.status !== null) {
             team.status = updateTeamDto.status;
         }
+        if(updateTeamDto.password != null){
+            team.password = updateTeamDto.password;
+        }
         return this.teamRepository.save(team);
       }
 
