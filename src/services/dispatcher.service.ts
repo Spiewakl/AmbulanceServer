@@ -23,7 +23,7 @@ export class DispatcherService {
     }
 
     async addDispatcher(addDispatcherDto: AddDispatcherDto): Promise<Dispatcher> {
-        const newDispatcher = this.dispatcherRepository.create({name: addDispatcherDto.name});
+        const newDispatcher = this.dispatcherRepository.create({name: addDispatcherDto.name, password: addDispatcherDto.password});
         return this.dispatcherRepository.save(newDispatcher);
     }
 
@@ -35,6 +35,9 @@ export class DispatcherService {
         const dispatcher = await this.dispatcherRepository.findOneBy({id: id});
         if(updateDispatcherDto.name !== null) {
             dispatcher.name = updateDispatcherDto.name;
+        }
+        if(updateDispatcherDto.password !== null) {
+            dispatcher.password = updateDispatcherDto.password;
         }
         return this.dispatcherRepository.save(dispatcher);
       }

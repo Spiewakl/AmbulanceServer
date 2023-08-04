@@ -4,10 +4,12 @@ import { AuthController } from './auth.controller';
 import { TeamModule } from '../modules/team.module';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
+import { DispatcherModule } from 'src/modules/dispatcher.module';
 
 @Module({
     imports: [
     TeamModule,
+    DispatcherModule,
     JwtModule.register({
         global: true,
         secret: jwtConstants.secret,

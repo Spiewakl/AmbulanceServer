@@ -9,4 +9,7 @@ export class Dispatcher {
     @Column()
     name: string;
 
+    @Column()
+    password: string;
+
 };
