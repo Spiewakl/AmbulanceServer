@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Delete, Param, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param, Put, UseGuards } from '@nestjs/common';
 import { AddTeamDto } from 'src/dto/team/add-team.dto';
 import { UpdateTeamDto } from 'src/dto/team/update-team.dto';
 import { Team } from 'src/entities/team.entity';
 import { TeamService } from 'src/services/team.service';
 import { DeleteResult } from 'typeorm';
+import { AuthGuard } from '../auth/auth.guard';
 
 
 @Controller('Team')
@@ -11,6 +12,7 @@ export class TeamController {
   constructor(private readonly teamService: TeamService) {}
 
   @Get()
+  @UseGuards(AuthGuard)
   async getTeams(): Promise<Team[]> { 
     return this.teamService.findAll();
   }
