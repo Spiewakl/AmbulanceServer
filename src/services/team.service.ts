@@ -7,6 +7,9 @@ import { UpdateTeamDto } from "src/dto/team/update-team.dto";
 @Injectable()
 
 export class TeamService {
+    findOne(name: string) {
+        throw new Error('Method not implemented.');
+    }
    
     constructor (
         @Inject('TEAM_REPOSITORY')
