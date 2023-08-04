@@ -7,9 +7,9 @@ import { UpdateTeamDto } from "src/dto/team/update-team.dto";
 @Injectable()
 
 export class TeamService {
-    findOne(name: string) {
-        throw new Error('Method not implemented.');
-    }
+   // findOne(name: string) {
+      //  throw new Error('Method not implemented.');
+    //}
    
     constructor (
         @Inject('TEAM_REPOSITORY')
@@ -20,7 +20,7 @@ export class TeamService {
         return this.teamRepository.find();
     }
 
-    async findByName(name: string): Promise<Team | null> {
+    async findOneByName(name: string): Promise<Team | null> {
         const result = await this.teamRepository.findOneBy({name: name});
         return result;
     }
