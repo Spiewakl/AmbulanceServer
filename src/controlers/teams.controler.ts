@@ -5,14 +5,16 @@ import { Team } from 'src/entities/team.entity';
 import { TeamService } from 'src/services/team.service';
 import { DeleteResult } from 'typeorm';
 import { AuthGuard } from '../auth/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard)
 @Controller('Team')
 export class TeamController {
   constructor(private readonly teamService: TeamService) {}
 
   @Get()
-  @UseGuards(AuthGuard)
   async getTeams(): Promise<Team[]> { 
     return this.teamService.findAll();
   }
