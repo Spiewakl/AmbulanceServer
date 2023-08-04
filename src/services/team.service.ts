@@ -26,7 +26,7 @@ export class TeamService {
     }
 
     async addTeam(addTeamDto: AddTeamDto): Promise<Team> {
-        const newTeam = this.teamRepository.create({name: addTeamDto.name, status: TeamStatusEnum.Free});
+        const newTeam = this.teamRepository.create({name: addTeamDto.name, password: addTeamDto.password, status: TeamStatusEnum.Free});
         return this.teamRepository.save(newTeam);
     }
 
