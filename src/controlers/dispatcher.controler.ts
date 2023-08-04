@@ -16,7 +16,7 @@ export class DispatcherController {
   }
 
   @Post()
-  async addDispatcher(@Body()addDispatcherDto): Promise<Dispatcher> {
+  async addDispatcher(@Body()addDispatcherDto: AddDispatcherDto): Promise<Dispatcher> {
     return this.dispatcherService.addDispatcher(addDispatcherDto);
   }
 
@@ -26,7 +26,7 @@ export class DispatcherController {
   }
 
   @Put("/:id")
-  async updateDispatcher(@Param("id") id: number, @Body()updateTeamDto): Promise<Dispatcher> {
-    return this.dispatcherService.updateDispatcher(id, updateTeamDto);
+  async updateDispatcher(@Param("id") id: number, @Body()updateDispatcherDto: UpdateDispatcherDto): Promise<Dispatcher> {
+    return this.dispatcherService.updateDispatcher(id, updateDispatcherDto);
   }
 }
