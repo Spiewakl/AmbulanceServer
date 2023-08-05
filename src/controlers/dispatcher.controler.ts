@@ -1,11 +1,14 @@
-import { Controller, Get, Post, Body, Delete, Param, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param, Put, UseGuards } from '@nestjs/common';
 import { AddDispatcherDto } from "../dto/dispatcher/add-dispatcher.dto";
 import { UpdateDispatcherDto } from "../dto/dispatcher/update-dispatcher.dto";
 import { Dispatcher } from '../entities/dispatcher.entity';
 import { DispatcherService } from '../services/dispatcher.service';
 import { DeleteResult } from 'typeorm';
+import { AuthGuard } from '../auth/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
-
+@ApiBearerAuth()
+@UseGuards(AuthGuard)
 @Controller('Dispatcher')
 export class DispatcherController {
   constructor(private readonly dispatcherService: DispatcherService) {}

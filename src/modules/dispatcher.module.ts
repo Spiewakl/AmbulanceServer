@@ -11,5 +11,6 @@ import { DispatcherController } from '../controlers/dispatcher.controler';
     DispatcherService,
   ],
   controllers: [DispatcherController],
+  exports: [DispatcherService],
 })
 export class DispatcherModule {}

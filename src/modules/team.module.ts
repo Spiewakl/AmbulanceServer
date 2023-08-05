@@ -13,5 +13,6 @@ import { IsTeamNotRegistered } from 'src/validators/team-name-exist.validator';
     IsTeamNotRegistered,
   ],
   controllers: [TeamController],
+  exports: [TeamService],
 })
 export class TeamModule {}

@@ -7,7 +7,6 @@ import { UpdateTeamDto } from "src/dto/team/update-team.dto";
 @Injectable()
 
 export class TeamService {
-   
     constructor (
         @Inject('TEAM_REPOSITORY')
         private teamRepository: Repository<Team>,
@@ -17,13 +16,13 @@ export class TeamService {
         return this.teamRepository.find();
     }
 
-    async findByName(name: string): Promise<Team | null> {
+    async findOneByName(name: string): Promise<Team | null> {
         const result = await this.teamRepository.findOneBy({name: name});
         return result;
     }
 
     async addTeam(addTeamDto: AddTeamDto): Promise<Team> {
-        const newTeam = this.teamRepository.create({name: addTeamDto.name, status: TeamStatusEnum.Free});
+        const newTeam = this.teamRepository.create({name: addTeamDto.name, password: addTeamDto.password, status: TeamStatusEnum.Free});
         return this.teamRepository.save(newTeam);
     }
 
@@ -38,6 +37,9 @@ export class TeamService {
         }
         if(updateTeamDto.status !== null) {
             team.status = updateTeamDto.status;
+        }
+        if(updateTeamDto.password != null){
+            team.password = updateTeamDto.password;
         }
         return this.teamRepository.save(team);
       }

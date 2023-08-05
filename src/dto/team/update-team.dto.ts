@@ -7,5 +7,7 @@ export class UpdateTeamDto{
     @TeamNotRegistered()
     name?: string | null;
     @ApiProperty()
-    status?: TeamStatusEnum;
+    status?: TeamStatusEnum | null;
+    @ApiProperty()
+    password?: string | null;
 };

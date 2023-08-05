@@ -1,10 +1,15 @@
 import { Module } from '@nestjs/common';
 import { TeamModule } from './modules/team.module';
 import { DispatcherModule } from './modules/dispatcher.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
 
-  imports: [TeamModule, DispatcherModule],
+  imports: [
+    TeamModule,
+    AuthModule,
+    DispatcherModule,
+  ],
   controllers:[],
   providers: [],
 })

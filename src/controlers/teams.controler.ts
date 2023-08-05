@@ -1,11 +1,15 @@
-import { Controller, Get, Post, Body, Delete, Param, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param, Put, UseGuards } from '@nestjs/common';
 import { AddTeamDto } from 'src/dto/team/add-team.dto';
 import { UpdateTeamDto } from 'src/dto/team/update-team.dto';
 import { Team } from 'src/entities/team.entity';
 import { TeamService } from 'src/services/team.service';
 import { DeleteResult } from 'typeorm';
+import { AuthGuard } from '../auth/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard)
 @Controller('Team')
 export class TeamController {
   constructor(private readonly teamService: TeamService) {}
@@ -26,7 +30,7 @@ export class TeamController {
   }
 
   @Put("/:id")
-  async updateTeam(@Param("id") id: number, @Body()updateTeamDto: UpdateTeamDto): Promise<Team> {
+  async updateTeam(@Param("id") id: number, @Body()updateTeamDto): Promise<Team> {
     return this.teamService.updateTeam(id, updateTeamDto);
   }
 }

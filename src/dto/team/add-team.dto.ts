@@ -5,4 +5,6 @@ export class AddTeamDto{
     @ApiProperty()
     @TeamNotRegistered()
     name: string;
+    @ApiProperty()
+    password: string;
 };
