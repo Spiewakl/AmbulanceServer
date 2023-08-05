@@ -13,10 +13,10 @@ export class AuthService {
     ) {}
 
   async signIn(loginDto: LoginDto): Promise<any> {
-  let user;
+    let user;
     switch(loginDto.source){
       case UserTypeEnum.Dispatcher:
-        user = await this.dispatcherService.findByName(loginDto.name);
+        user = await this.dispatcherService.findOneByName(loginDto.name);
         break;
       case UserTypeEnum.Team:
         user = await this.teamService.findOneByName(loginDto.name);

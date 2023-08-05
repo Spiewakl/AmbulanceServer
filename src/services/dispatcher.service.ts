@@ -17,7 +17,7 @@ export class DispatcherService {
         return this.dispatcherRepository.find();
     }
 
-    async findByName(name: string): Promise<Dispatcher | null> {
+    async findOneByName(name: string): Promise<Dispatcher | null> {
         const result = await this.dispatcherRepository.findOneBy({name: name});
         return result;
     }
