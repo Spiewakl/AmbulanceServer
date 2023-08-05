@@ -6,6 +6,8 @@ import { TeamService } from 'src/services/team.service';
 import { DeleteResult } from 'typeorm';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { Role } from 'src/enums/role.enum';
+import { Roles } from 'src/auth/roles.decorator';
 
 
 @ApiBearerAuth()
@@ -20,16 +22,19 @@ export class TeamController {
   }
 
   @Post()
+  @Roles(Role.Admin)
   async addTeam(@Body()addTeamDto: AddTeamDto): Promise<Team> {
     return this.teamService.addTeam(addTeamDto);
   }
 
   @Delete("/:id")
+  @Roles(Role.Admin)
   async deleteTeam(@Param("id") id: number): Promise<DeleteResult> {
     return this.teamService.deleteTeam(id);
   }
 
   @Put("/:id")
+  @Roles(Role.Admin)
   async updateTeam(@Param("id") id: number, @Body()updateTeamDto): Promise<Team> {
     return this.teamService.updateTeam(id, updateTeamDto);
   }
