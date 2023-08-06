@@ -3,6 +3,7 @@ import { TeamService } from '../services/team.service';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto, UserTypeEnum } from 'src/dto/team/login.dto';
 import { DispatcherService } from 'src/services/dispatcher.service';
+import { Role } from 'src/enums/role.enum';
 
 @Injectable()
 export class AuthService {
@@ -25,9 +26,18 @@ export class AuthService {
     if (user?.password !== loginDto.password) {
       throw new UnauthorizedException();
     }
-    const payload = { sub: user.id, username: user.name, role: user.source };
+    const payload = { sub: user.id, username: user.name, roles: [this.mapToRoleEnum(loginDto.source)] };
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
+  }
+
+  private mapToRoleEnum(userType: UserTypeEnum): Role{
+    switch (userType){
+      case UserTypeEnum.Dispatcher:
+        return Role.Admin;
+      case UserTypeEnum.Team:
+        return Role.Team;
+    }
   }
 }

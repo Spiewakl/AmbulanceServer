@@ -2,6 +2,9 @@ import { Module } from '@nestjs/common';
 import { TeamModule } from './modules/team.module';
 import { DispatcherModule } from './modules/dispatcher.module';
 import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './auth/roles.guard';
+import { AuthGuard } from './auth/auth.guard';
 
 @Module({
 
@@ -11,6 +14,15 @@ import { AuthModule } from './auth/auth.module';
     DispatcherModule,
   ],
   controllers:[],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
 })
 export class AppModule {}
