@@ -16,7 +16,16 @@ export class Team {
     password: string;
 };
 export enum TeamStatusEnum{
-    Free='base',
-    Free2='oobase',
-    
+    Free='Wolny - w bazie',
+    Free2='Wolny - poza bazą',
+    Comeback='Powrót do bazy',
+    Disinfection='Dezynfekcja',
+    Refueling='Tankowanie/Mycie',
+    Malfunction='Awaria',
+    Finish='Po dyżurze',
+    DuringAction='W trakcie zlecenia',
+    OnThePlace='Dojazd do pacjenta',
+    ReturnToPlace='Powrót z pacjentem',
+    GoWork='Karta na mailu',
+    Break='Wracaj do bazy',
 }
