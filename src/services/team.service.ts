@@ -3,6 +3,7 @@ import { DeleteResult, Repository } from "typeorm";
 import { Team, TeamStatusEnum } from "../entities/team.entity"
 import { AddTeamDto } from "src/dto/team/add-team.dto";
 import { UpdateTeamDto } from "src/dto/team/update-team.dto";
+import { StatusService } from "./transitions.service";
 
 @Injectable()
 
@@ -10,6 +11,7 @@ export class TeamService {
     constructor (
         @Inject('TEAM_REPOSITORY')
         private teamRepository: Repository<Team>,
+        private transitions: StatusService,
     ){}
 
     async findAll(): Promise<Team[]> {
@@ -36,6 +38,8 @@ export class TeamService {
             team.name = updateTeamDto.name;
         }
         if(updateTeamDto.status !== null) {
+            this.transitions.currentState = team.status
+            this.transitions.transitionTo(updateTeamDto.status)
             team.status = updateTeamDto.status;
         }
         if(updateTeamDto.password != null){
