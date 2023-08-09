@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, Timestamp } from "typeorm";
 
 @Entity()
 export class StatusEvent {
@@ -12,6 +12,6 @@ export class StatusEvent {
     @Column()
         previousStatus: string;
     
-    @Column()
-        time: number;
+    @Column({ type: 'date' })
+        time: string;
 }

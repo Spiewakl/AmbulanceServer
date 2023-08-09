@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { TeamStatusEnum } from "src/entities/team.entity";
 import { TeamNotRegistered } from "src/validators/team-name-exist.validator";
 
 export class AddTeamDto{
@@ -7,4 +8,6 @@ export class AddTeamDto{
     name: string;
     @ApiProperty()
     password: string;
+    @ApiProperty()
+    status: TeamStatusEnum;
 };
