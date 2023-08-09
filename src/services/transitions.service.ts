@@ -3,7 +3,7 @@ import { TeamStatusEnum, transitions } from 'src/entities/team.entity';
 
 @Injectable()
 export class StatusService {
-    private currentState: TeamStatusEnum = TeamStatusEnum.Free;
+    public currentState: TeamStatusEnum = TeamStatusEnum.Free;
     
     canTransitionTo(targetState: TeamStatusEnum): boolean {
         const allowedTransitions = transitions[this.currentState];
@@ -14,7 +14,7 @@ export class StatusService {
         if (this.canTransitionTo(targetState)) {
             this.currentState = targetState;
         } else {
-          throw new BadRequestException(`Cannot transition from ${this.currentState} to ${targetState}`);
+          throw new BadRequestException(`Nie można zmienić statusu ${this.currentState} na ${targetState}`);
         }
     }
      getCurrentState(): TeamStatusEnum {

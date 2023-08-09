@@ -8,6 +8,4 @@ export class AddTeamDto{
     name: string;
     @ApiProperty()
     password: string;
-    @ApiProperty()
-    status: TeamStatusEnum;
 };
