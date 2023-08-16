@@ -1,23 +1,19 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { TeamStatusEnum, transitions } from 'src/entities/team.entity';
+import { Team, TeamStatusEnum, transitions } from 'src/entities/team.entity';
 
 @Injectable()
 export class StatusService {
-    public currentState: TeamStatusEnum = TeamStatusEnum.Free;
     
-    canTransitionTo(targetState: TeamStatusEnum): boolean {
-        const allowedTransitions = transitions[this.currentState];
+    canTransitionTo(targetState: TeamStatusEnum, oldState: TeamStatusEnum): boolean {
+        const allowedTransitions = transitions[oldState];
         return allowedTransitions.includes(targetState);
     }
-  
-    transitionTo(targetState: TeamStatusEnum): void {
-        if (this.canTransitionTo(targetState)) {
-            this.currentState = targetState;
+    
+    transitionTo(targetState: TeamStatusEnum, oldState: TeamStatusEnum): void {
+        if (this.canTransitionTo(targetState, oldState)) {
+           return
         } else {
-          throw new BadRequestException(`Nie można zmienić statusu ${this.currentState} na ${targetState}`);
+          throw new BadRequestException(`Nie można zmienić statusu ${oldState} na ${targetState}`);
         }
-    }
-     getCurrentState(): TeamStatusEnum {
-        return this.currentState;
     }
 }

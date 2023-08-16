@@ -38,8 +38,7 @@ export class TeamService {
             team.name = updateTeamDto.name;
         }
         if(updateTeamDto.status !== null) {
-            this.transitions.currentState = team.status
-            this.transitions.transitionTo(updateTeamDto.status)
+            this.transitions.transitionTo(updateTeamDto.status, team.status)
             team.status = updateTeamDto.status;
         }
         if(updateTeamDto.password != null){
