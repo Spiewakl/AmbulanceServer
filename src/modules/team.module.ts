@@ -5,6 +5,7 @@ import { TeamService } from '../services/team.service';
 import { TeamController } from 'src/controlers/teams.controler';
 import { IsTeamNotRegistered } from 'src/validators/team-name-exist.validator';
 import { StatusService } from 'src/services/transitions.service';
+import { TeamStatusController } from 'src/controlers/teamStatus.controler';
 
 @Module({
   imports: [DatabaseModule],
@@ -14,7 +15,7 @@ import { StatusService } from 'src/services/transitions.service';
     IsTeamNotRegistered,
     StatusService,
   ],
-  controllers: [TeamController],
+  controllers: [TeamController, TeamStatusController],
   exports: [TeamService],
 })
 export class TeamModule {}

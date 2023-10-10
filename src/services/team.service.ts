@@ -18,6 +18,11 @@ export class TeamService {
         return this.teamRepository.find();
     }
 
+    async findOneById(id: number): Promise<Team | null> {
+        const result = await this.teamRepository.findOneBy({id: id});
+        return result;
+    }
+
     async findOneByName(name: string): Promise<Team | null> {
         const result = await this.teamRepository.findOneBy({name: name});
         return result;

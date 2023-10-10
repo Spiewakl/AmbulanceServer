@@ -34,8 +34,10 @@ export class TeamController {
   }
 
   @Put("/:id")
-  @Roles(Role.Admin)
+  @Roles(Role.Team)
   async updateTeam(@Param("id") id: number, @Body()updateTeamDto: UpdateTeamDto): Promise<Team> {
     return this.teamService.updateTeam(id, updateTeamDto);
   }
 }
+
+
