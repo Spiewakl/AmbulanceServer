@@ -6,6 +6,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/roles.guard';
 import { AuthGuard } from './auth/auth.guard';
 import { StatusService } from './services/transitions.service';
+import { EventsModule } from './events/events.module';
 
 @Module({
 
@@ -13,6 +14,7 @@ import { StatusService } from './services/transitions.service';
     TeamModule,
     AuthModule,
     DispatcherModule,
+    EventsModule,
   ],
   controllers:[],
   providers: [
