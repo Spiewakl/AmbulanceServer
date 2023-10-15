@@ -8,13 +8,15 @@ import { AuthGuard } from '../auth/auth.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { Role } from 'src/enums/role.enum';
 import { Roles } from 'src/auth/roles.decorator';
+import { EventsGateway } from 'src/events/events.gateway';
 
 
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
 @Controller('Team')
 export class TeamController {
-  constructor(private readonly teamService: TeamService) {}
+  constructor(private readonly teamService: TeamService, 
+    private readonly eventGateway: EventsGateway,) {}
 
   @Get()
   async getTeams(): Promise<Team[]> { 
@@ -34,10 +36,9 @@ export class TeamController {
   }
 
   @Put("/:id")
-  @Roles(Role.Team)
+  @Roles(Role.Team, Role.Admin)
   async updateTeam(@Param("id") id: number, @Body()updateTeamDto: UpdateTeamDto): Promise<Team> {
+    this.eventGateway.server.emit('events', 'Emit działa')
     return this.teamService.updateTeam(id, updateTeamDto);
   }
 }
-
-
