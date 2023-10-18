@@ -1,9 +1,10 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { DeleteResult, Repository } from "typeorm";
-import { Team, TeamStatusEnum } from "../entities/team.entity"
+import { Team, TeamStatusEnum, transitions } from "../entities/team.entity"
 import { AddTeamDto } from "src/dto/team/add-team.dto";
 import { UpdateTeamDto } from "src/dto/team/update-team.dto";
 import { StatusService } from "./transitions.service";
+import { EventsGateway } from "src/events/events.gateway";
 
 @Injectable()
 
@@ -12,6 +13,7 @@ export class TeamService {
         @Inject('TEAM_REPOSITORY')
         private teamRepository: Repository<Team>,
         private transitions: StatusService,
+        private readonly eventGateway: EventsGateway,
     ){}
 
     async findAll(): Promise<Team[]> {
@@ -45,11 +47,17 @@ export class TeamService {
         if(updateTeamDto.status !== null) {
             this.transitions.transitionTo(updateTeamDto.status, team.status)
             team.status = updateTeamDto.status;
+            this.eventGateway.server.emit('status', {team: team.name, status: team.status})
         }
         if(updateTeamDto.password != null){
             team.password = updateTeamDto.password;
         }
         return this.teamRepository.save(team);
       }
+
+    async allowedStatuses(id: number): Promise<string[]>{
+        const team = await this.teamRepository.findOneBy({id: id});
+        return transitions[team.status]
+    }
 
 }

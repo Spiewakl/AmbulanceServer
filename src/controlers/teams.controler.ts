@@ -41,4 +41,15 @@ export class TeamController {
     this.eventGateway.server.emit('events', 'Emit działa')
     return this.teamService.updateTeam(id, updateTeamDto);
   }
+  @Post("/emit")
+  @Roles(Role.Team, Role.Admin)
+  async emitEvent(){
+    this.eventGateway.server.emit('events', 'Emit działa')
+  }
+
+  @Get("/allowedStatus/:id")
+  @Roles(Role.Team, Role.Admin)
+  async getAllowedStatusesForTeam(@Param("id") id: number): Promise<string[]>{
+    return this.teamService.allowedStatuses(id)
+  }
 }
